@@ -45,7 +45,10 @@ public static int keyCounter;// 2. переменная счетчик
     }
 
 
-
+    public void salaryIndexing(int a) {
+            salary+=salary*a/100;
+        System.out.println(salary);
+    }
 
 
 
