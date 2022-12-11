@@ -15,21 +15,19 @@ public class Main {
         base[8] = new Employee("Левин Матвей Тимурович     ", 1, 23000);
         base[9] = new Employee("Ракова Софья Максимовна    ", 1, 21000);
 
-       // totalGet(base);// 4.
-       // setDepSal(base,0,1,20000);//5.
 
-        // 8.1
+        System.out.println("=====5=====");
+        setDepSal(base,0,1,20000);// 5.
 
-
-
-        String[] arr = totalGetStr(base);//8.3
-        String[][] arr1 = arrToMultArr(arr, ' ');
-        String min = totalColumn(arr1, 3, 1);
-        System.out.println( min);
+        System.out.println("\n=====8.1=====");
+      totalGetStr(base);// 8.1
 
 
-
-
+        System.out.println("\n=====8.4=====");
+        int totalSalaryMonth=minMaxTotalSalaryMonth(base);//8,2/8.3/8.4
+        System.out.println("\n=====8.5=====");
+        System.out.println("Cредняя ЗП " +totalSalaryMonth/ base.length);
+        totalFullName(base);
 
 
 
@@ -37,23 +35,15 @@ public class Main {
 
     }
 
-    public static void totalGet(Employee[] base) { // 4.тотал геттер
 
-
-        System.out.println("Id " + "            ФИО           " + "Отдел " + "Зарплата ");
-        for (int i = 0; i < base.length; i++) {
-            base[i].getEmployee();
-        }
-    }
 
     public static void setDepSal(Employee[] base, int id, int dep, int sal) {//5. сеттеры отдел,ЗП
 
         base[id].setDepartmentSalary(dep, sal);
-        base[id].getEmployee();
+        System.out.println(+ base[id].getId()+" "+base[id].getName()+" "+base[id].getDepartment()+" "+base[id].getSalary());
     }
 
-
-    public static String[] totalGetStr(Employee[] base) {// 8.1 тотал геттер Стринг
+    public static void totalGetStr(Employee[] base) {// 8.1 тотал гет Стринг
 
 
         String[] arr = new String[base.length];
@@ -62,60 +52,45 @@ public class Main {
             arr[i] = tot;
             System.out.println(tot);
         }
-        return arr;}
-
-
-
-
-
-    // массив в двумерный
-    public static String[][] arrToMultArr(String[] a, char b) {
-
-        String[] j0 = a[0].split(" ");
-
-        String[][] total = new String[a.length][j0.length];
-        for (int i = 0; i < a.length; i++) {
-            String[] total1 = a;
-            String a0 = total1[i];
-            a0.replace(' ', '?');
-            String[] a1 = a0.split("!");
-            for (int j = 0; j < a1.length; j++) {
-                total[i][j] = a1[j];
-
-
-            }
         }
-        return total;
+
+    public static int minMaxTotalSalaryMonth(Employee[] base) {//8,1/8.2/8.3
+        int totalSalaryMonth = 0;
+        double minSalary= base[0].getSalary();
+        double maxSalary=0;
+                for (int i = 0; i <base.length; i++) {
+            int salary = base[i].getSalary();
+            if (minSalary > salary) {
+                minSalary=salary+ i*0.1;
+
+            } if (maxSalary<salary){
+                maxSalary = salary+ i*0.1;
+            }
+            totalSalaryMonth += salary;
+        }
+        System.out.println("8.2 За месяц выплачено " +totalSalaryMonth);
+        double idMin = minSalary %1 *10;
+        System.out.println("\n=====8.3=====");
+        System.out.println("Минимальная зарплата  "+base[(int)idMin].getName()+ " составляет " +(int)minSalary);
+        double idMax =  maxSalary % 1 * 10;
+        System.out.println("\n=====8.4=====");
+        System.out.println("Максимальная зарплата  "+base[(int)idMax].getName()+ " составляет " +(int)maxSalary);
+        return totalSalaryMonth;
+    }
+
+    public static void totalFullName(Employee[] base) {
+        System.out.println("\n=====8.6=====");
+        for (int i = 0; i < base.length; i++) {
+            System.out.println(base[i].getName());
+
+        }
     }
 
 
-    // тотал столбец
 
-    public static String totalColumn(String[][] a, int b, int c) {// b- столбец c=1-min, 2-max, 3-total
-        int ret = Integer.parseInt(a[0][0]);
-        String ret1 = "";
-        for (int i = 0; i < a.length; i++) {
-            String a1 = a[i][b];
-            int a2 = Integer.parseInt(a1);
-            if (c == 1 && a2 < ret) {
-                ret = a2;
-                ret1 = i + "";
-            } else if (c == 2 && a2 > ret) {
-                ret = a2;
-                ret1 = i + "";
-            }
-            else {ret+=a2;
-            }
 
-        }
-        if (c == 3) {
-            ret -= Integer.parseInt(a[0][0]);
-        }
-        ret1+=" "+ ret;
-        return ret1;
-    }
 
-    // столбец в массив инт
+
 
 
 }

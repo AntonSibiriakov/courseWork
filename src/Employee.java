@@ -1,10 +1,10 @@
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Employee {
-public static int keyCounter;// переменная счетчик
+public static int keyCounter;// 2. переменная счетчик
 
 
-        private int id = keyCounter;
+        private int id = keyCounter;// 3.
         private String fullName;
 
         private int department;
@@ -17,25 +17,36 @@ public static int keyCounter;// переменная счетчик
             this.salary = salary;
             keyCounter++;// инкремент счетчика
         }
+    public int getId() {
+        return id;
+    }
+    public String getName() {
+        return fullName;
+    }
+    public int getDepartment() {
+            return department;
+    }
+    public int getSalary() {
+            return salary;
+    }
 
-        // получение значений всех полей
-        public void getEmployee () {
-            System.out.println(id + "  " + fullName + " " + department + " " + salary + " ");
-        }
 
 
-        // устанавливать отдел и ЗП
-        void setDepartmentSalary ( int dep, int sal){
+        void setDepartmentSalary ( int dep, int sal){// 5.сет отдел и ЗП
             department = dep;
             salary = sal;
         }
 
 
-    // получение всех полей Стринг
-    public String getEmployeeStr() {
+
+    public String getEmployeeStr() {// гет всех полей Стринг
             String total = id+" "+fullName+" "+department+" "+ salary+" ";
             return total;
     }
+
+
+
+
 
 
 
